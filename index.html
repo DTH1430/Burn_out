@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burnout isn't laziness.</title>
+    <meta name="description"
+        content="A clear explanation of the difference between burnout and laziness, written without motivational language or therapy clichés.">
+
+    <!-- Google Fonts: Syne (Display) & Manrope (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Syne:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Light Mode (Default) - Cement & Moss */
+            --bg: #E6E6E6;
+            --surface: #F0F0F0;
+            --text: #1A1A1A;
+            --heading: #0F0F0F;
+            --primary: #4A5D23;
+            /* Dead Moss */
+            --accent: #D94418;
+            /* Burnt Orange */
+            --muted: #555555;
+            --border: #1A1A1A;
+
+            /* SVG Noise for Texture */
+            --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+
+            --shadow-hard: 4px 4px 0px var(--border);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Dark Mode - Void & Pale Moss */
+                --bg: #121212;
+                --surface: #1E1E1E;
+                --text: #CFCFCF;
+                --heading: #EFEFEF;
+                --primary: #BFD690;
+                /* Pale Moss */
+                --accent: #FF5522;
+                /* Burning Orange */
+                --muted: #888888;
+                --border: #CFCFCF;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 18px;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            padding: 4rem 1.5rem;
+        }
+
+        /* Noise Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--grain);
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.7;
+        }
+
+        main {
+            max-width: 640px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3 {
+            font-family: 'Syne', sans-serif;
+            color: var(--heading);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin-bottom: 3rem;
+            text-transform: lowercase;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 1.5rem;
+            display: inline-block;
+            width: 100%;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        h2::before {
+            content: counter(section, decimal-leading-zero);
+            counter-increment: section;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+        }
+
+        body {
+            counter-reset: section;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        strong {
+            font-weight: 700;
+            color: var(--heading);
+        }
+
+        /* Special Classes */
+        .opening {
+            font-size: 1.15rem;
+            color: var(--heading);
+            font-weight: 500;
+            margin-bottom: 3.5rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .highlight-accent {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-hard);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--border);
+        }
+
+        .closing {
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--muted);
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-family: 'Manrope', sans-serif;
+            /* Keep body font */
+            opacity: 0.8;
+            border-bottom: 1px solid transparent;
+            /* Aesthetic balance */
+        }
+
+        /* Links */
+        a {
+            color: var(--heading);
+            text-decoration: none;
+            border-bottom: 2px solid var(--primary);
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            background-color: var(--primary);
+            color: var(--bg);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 2rem 1rem;
+                font-size: 16px;
+            }
+
+            h1 {
+                padding-bottom: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+                margin: 2rem -1rem;
+                /* Full bleed on small screens-ish */
+                width: calc(100% + 2rem);
+                box-shadow: 3px 3px 0px var(--border);
+            }
+
+            .opening {
+                padding-left: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>burnout isn't laziness.</h1>
+
+        <p class="opening">
+            Your manager doesn't know the difference. HR definitely doesn't.
+            But since you're reading this instead of answering Slack, let's clarify.
+        </p>
+
+        <h2>what burnout actually feels like</h2>
+
+        <p>You want to work. Your brain has simply unionized without telling you.</p>
+
+        <p>You stare at your monitor with the intensity of someone who definitely knows what they're doing. Nothing
+            happens. The cursor blinks. It's been three hours.</p>
+
+        <p>Tasks you used to finish before your coffee got cold now require a meeting, two naps, and existential
+            bargaining.</p>
+
+        <div class="card">
+            <p style="margin-bottom:0">You're still hitting deadlines. Technically. Through a combination of panic,
+                caffeine, and whatever the
+                opposite of work-life balance is.</p>
+        </div>
+
+        <p>Sleep doesn't help. Neither do weekends—those are just unpaid work anxiety with better snacks.</p>
+
+        <p>You've started Googling things like "is it normal to feel nothing" during standups. It is not, but also,
+            same.</p>
+
+        <h2>what laziness actually is</h2>
+
+        <p><span class="highlight-accent">Laziness is a choice.</span> A beautiful, guilt-free vacation from
+            productivity culture.</p>
+
+        <p>Lazy people don't spiral. They simply don't want to do the thing. End of story. No drama.</p>
+
+        <p>They're not emotionally devastated that they haven't optimized their morning routine. They don't have a
+            morning routine. They have mornings.</p>
+
+        <p>Lazy people don't read articles about burnout. They're playing video games right now. Living their truth.</p>
+
+        <p>Honestly? Aspirational behavior.</p>
+
+        <h2>why they get confused</h2>
+
+        <p>Both involve not doing stuff. That's where the similarity ends and the corporate gaslighting begins.</p>
+
+        <p>Burnout is sneaky. You're still replying to emails at 11pm, so you must be fine, right? You're definitely not
+            crying in a conference room. That's just allergies.</p>
+
+        <p>The people who burn out are usually the ones who never took a lazy day in their lives. They powered through
+            every cold, skipped every boundary, and called it "dedication."</p>
+
+        <p>Calling burnout "laziness" is easier for everyone except you. It means the system isn't broken—you just need
+            to try harder. Have you considered a productivity app?</p>
+
+        <p>If trying harder worked, you'd be a CEO by now. Or at least not reading this.</p>
+
+        <h2>what helps (and what doesn't)</h2>
+
+        <p><strong>Doesn't help:</strong> #Hustle content, that one podcast about waking up at 4am, your company's
+            wellness webinar, crystals, telling yourself to be grateful, comparing yourself to people on LinkedIn who
+            are definitely also lying.</p>
+
+        <p><strong>Might help:</strong> Doing less. Letting things fail. Accepting that your inbox will never be at zero
+            and that's everyone's problem now. Talking to someone who responds with "that sucks" instead of solutions.
+        </p>
+
+        <p>Recovery isn't linear. You'll have one good Tuesday and immediately sign up for three new responsibilities.
+            This is called "the trap."</p>
+
+        <p>The goal isn't to return to your previous output. Your previous output is what got you here. Maybe aim for
+            something sustainable, like "adequate" or "keeping it together."</p>
+
+        <div class="closing">
+            <p>Burnout isn't a failure of character. It's the predictable result of pretending you're a machine in a
+                system that agrees.</p>
+            <p>You noticed. That's the first step.</p>
+            <p>The second step is probably also staring at this screen. That's fine. We can do this together, in
+                silence, not making eye contact.</p>
+        </div>
+    </main>
+</body>
+
+</html>
